@@ -84,14 +84,12 @@ function updateScore(roundResult, playerScore) {
 function determineWinner(playerScore, TOTAL_ROUNDS) {
     // the player wins
     if (playerScore > TOTAL_ROUNDS/2) {
-        return `You have won! You scored ${playerScore} and computer scored 
-                ${TOTAL_ROUNDS - playerScore}.`;
+        return `You have won! You scored ${playerScore} and computer scored ${TOTAL_ROUNDS - playerScore}.`;
     }
     
     // the computer wins
     else if (playerScore < TOTAL_ROUNDS/2) {
-        return `You have lost! You scored ${playerScore} and computer scored 
-        ${TOTAL_ROUNDS - playerScore}.`;
+        return `You have lost! You scored ${playerScore} and computer scored ${TOTAL_ROUNDS - playerScore}.`;
     }
 
     // player score equals the number of rounds divided by 2 (only occurs 
