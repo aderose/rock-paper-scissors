@@ -6,10 +6,11 @@ function game() {
     let computerSelection;
     let roundResult;
     let playerScore = 0;
+    let computerScore = 0;
     const TOTAL_ROUNDS = 5;
 
     // iterate through 5 rounds of the game
-    for (i = 0; i < TOTAL_ROUNDS; i++) {
+    for (let i = 0; i < TOTAL_ROUNDS; i++) {
         
         // get user selection
         playerSelection = getPlayerSelection();
@@ -23,13 +24,14 @@ function game() {
         // print the winner to the console
         console.log(roundResult);
 
-        // update player's score based on the result of that round
-        playerScore = updateScore(roundResult, playerScore);
+        // update scores based on the result of that round
+        playerScore = updateScore(roundResult, playerScore, "win");
+        computerScore = updateScore(roundResult, computerScore, "lose");
 
     }
 
     // end of game - determine the winner and print that to the console
-    console.log(determineWinner(playerScore, TOTAL_ROUNDS));
+    console.log(determineWinner(playerScore, computerScore));
 }
 
 // gather user selection:
@@ -76,24 +78,23 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function updateScore(roundResult, playerScore) {
-    // increment score if player wins or draws
-    return (roundResult.match(/(win|draw)/i)) ? ++playerScore : playerScore;
+function updateScore(roundResult, currentScore, searchStr) {
+    // increment score if result of that round contains the search string
+    return (roundResult.includes(searchStr)) ? ++currentScore : currentScore;
 }
 
-function determineWinner(playerScore, TOTAL_ROUNDS) {
+function determineWinner(playerScore, computerScore, TOTAL_ROUNDS) {
     // the player wins
-    if (playerScore > TOTAL_ROUNDS/2) {
-        return `You have won! You scored ${playerScore} and computer scored ${TOTAL_ROUNDS - playerScore}.`;
+    if (playerScore > computerScore) {
+        return `You have won! You scored ${playerScore} and computer scored ${computerScore}.`;
     }
     
     // the computer wins
-    else if (playerScore < TOTAL_ROUNDS/2) {
-        return `You have lost! You scored ${playerScore} and computer scored ${TOTAL_ROUNDS - playerScore}.`;
+    else if (playerScore < computerScore) {
+        return `You have lost! You scored ${playerScore} and computer scored ${computerScore}.`;
     }
 
-    // player score equals the number of rounds divided by 2 (only occurs 
-    // when TOTAL_ROUNDS is even)
+    // it was a tie
     else {
         return `It was a tie! You both scored ${playerScore}`;
     }
