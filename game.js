@@ -47,7 +47,8 @@ function getComputerSelection() {
     const selectionNumber = Math.floor(Math.random() * 3);
 
     // return the selection based on the random selected number
-    return (selectionNumber == 2) ? "rock" : (selectionNumber == 1) ? "paper" : "scissors";
+    return (selectionNumber == 2) ? "rock" : 
+           (selectionNumber == 1) ? "paper" : "scissors";
 }
 
 // play a single round using the selections:
@@ -63,8 +64,8 @@ function playRound(playerSelection, computerSelection) {
 
     // group all scenarios in which the user wins
     else if ((playerSelection === "rock" && computerSelection === "scissors") ||
-                (playerSelection === "paper" && computerSelection === "rock") ||
-                (playerSelection === "scissors" && computerSelection === "paper")) {
+             (playerSelection === "paper" && computerSelection === "rock") ||
+             (playerSelection === "scissors" && computerSelection === "paper")) {
             // user wins
             return `You win! ${playerSelection} beats ${computerSelection}.`;
     }
@@ -83,15 +84,18 @@ function updateScore(roundResult, playerScore) {
 function determineWinner(playerScore, TOTAL_ROUNDS) {
     // the player wins
     if (playerScore > TOTAL_ROUNDS/2) {
-        return `You have won! You scored ${playerScore} and computer scored ${TOTAL_ROUNDS - playerScore}.`;
+        return `You have won! You scored ${playerScore} and computer scored 
+                ${TOTAL_ROUNDS - playerScore}.`;
     }
     
     // the computer wins
     else if (playerScore < TOTAL_ROUNDS/2) {
-        return `You have lost! You scored ${playerScore} and computer scored ${TOTAL_ROUNDS - playerScore}.`;
+        return `You have lost! You scored ${playerScore} and computer scored 
+        ${TOTAL_ROUNDS - playerScore}.`;
     }
 
-    // player score equals the number of rounds divided by 2 (only occurs when TOTAL_ROUNDS is even)
+    // player score equals the number of rounds divided by 2 (only occurs 
+    // when TOTAL_ROUNDS is even)
     else {
         return `It was a tie! You both scored ${playerScore}`;
     }
